@@ -30,3 +30,60 @@
 
  <p>첫째 줄부터 넷째 줄까지 차례대로 (3), (4), (5), (6)에 들어갈 값을 출력한다.</p>
 
+## 후기
+
+그냥 하드코딩 해버렸다.
+
+```javascript
+const fs = require("fs");
+const filePath = process.platform === "linux" ? "dev/stdin" : "run/input.txt";
+const input = fs.readFileSync(filePath).toString().split("\n");
+
+const operation = (a, b) => {
+  let num1 = 0;
+  let num2 = 0;
+  let num3 = 0;
+
+  let sum = 0;
+
+  num1 +=
+    Number(a[0]) * 100 * Number(b[2]) +
+    Number(a[1]) * 10 * Number(b[2]) +
+    Number(a[2]) * Number(b[2]);
+
+  num2 +=
+    Number(a[0]) * 100 * Number(b[1]) +
+    Number(a[1]) * 10 * Number(b[1]) +
+    Number(a[2]) * Number(b[1]);
+
+  num3 +=
+    Number(a[0]) * 100 * Number(b[0]) +
+    Number(a[1]) * 10 * Number(b[0]) +
+    Number(a[2]) * Number(b[0]);
+
+  sum += num1 + num2 * 10 + num3 * 100;
+
+  const result = [num1, num2, num3, sum];
+
+  for (v of result) {
+    console.log(v);
+  }
+};
+
+operation(input[0], input[1]);
+
+```
+
+숏코딩을 봤다.
+
+```javascript
+const [A, B] = require('fs').readFileSync('/dev/stdin').toString().split('\n');
+for (let i = B.length; i > 0; i--) {
+    console.log(Number(A) * Number(B[i - 1]));
+}
+console.log(Number(A) * Number(B));
+```
+
+나는 실제로 곱셈을 하는 것처럼 하드코딩 했다면, 이 풀이는 반복문과 배열 그리고 배열의 인덱싱을 활용하여 효율적이고 간략하게 표현했다.
+
+**아직까지 자바스크립트 문법이 익숙하지 않은 것이 티가 난다.**
